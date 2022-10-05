@@ -1,0 +1,19 @@
+{
+  "name": "projeto-precos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx @google-cloud/functions-framework --target=main"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.1.2",
+    "node-fetch": "^3.2.10",
+    "puppeteer": "^18.0.5"
+  }
+}
