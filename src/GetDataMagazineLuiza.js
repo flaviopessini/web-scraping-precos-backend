@@ -1,25 +1,33 @@
 import puppeteer from 'puppeteer'
 
+const userAgent =
+    'Mozilla/5.0 (X11; Linux x86_64)' +
+    'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36'
+
 export class GetDataMagazineLuiza {
     constructor(url) {
         this.url = url
     }
 
     async getData() {
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({
+            headless: true,
+        })
+
         const page = await browser.newPage()
 
-        // await page.waitForSelector('.sc-kDTinF')
-
-        const userAgent =
-            'Mozilla/5.0 (X11; Linux x86_64)' +
-            'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36'
+        await page.setExtraHTTPHeaders({
+            'Accept-Charset': 'utf-8',
+            'Content-Type': 'text/html; charset=utf-8',
+        })
 
         await page.setUserAgent(userAgent)
 
-        await page.goto(this.url)
+        await page.setViewport({ width: 1280, height: 720 })
 
-        // console.log('URL -> ', this.url);
+        await page.goto(this.url, {
+            waitUntil: 'domcontentloaded',
+        })
 
         const data = await page.evaluate(() => {
             return {
@@ -36,8 +44,7 @@ export class GetDataMagazineLuiza {
             }
         })
 
-        // console.log('DATA -> ', data);
-
+        await page.close()
         await browser.close()
 
         return data
