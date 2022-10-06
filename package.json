@@ -4,10 +4,13 @@
     "description": "",
     "main": "index.js",
     "type": "module",
+    "watch": {
+        "start": "*.js"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "npx @google-cloud/functions-framework --target=main",
         "watch": "npm-watch start",
+        "start": "npx @google-cloud/functions-framework --target=main",
         "format:check": "prettier --check .",
         "format:write": "prettier --write .",
         "lint:check": "eslint .",
