@@ -9,77 +9,54 @@ export class GetDataMercadolivre {
         this.url = url
     }
 
-    async getData() {
-        const search = 'ssd 1 tb samsung evo plus'
-
+    async getData(search) {
+        const items = []
         const browser = await puppeteer.launch({
             headless: false,
         })
-
         const page = await browser.newPage()
-
         await page.setExtraHTTPHeaders({
             'Accept-Charset': 'utf-8',
             'Content-Type': 'text/html; charset=utf-8',
         })
-
         await page.setUserAgent(userAgent)
-
-        await page.setViewport({ width: 1280, height: 720 })
-
+        await page.setViewport({ width: 1366, height: 768 })
         await page.goto(this.url, {
             waitUntil: 'domcontentloaded',
         })
-
         await page.waitForSelector('.nav-search-input')
-
-        await new Promise((r) => setTimeout(r, 500))
-
+        await new Promise((w) => setTimeout(w, 500))
         await page.type('.nav-search-input', search)
-
         await Promise.all([
             page.waitForNavigation(),
             page.click('.nav-search-btn'),
         ])
-
         const allLinks = await page.$$eval(
             '.ui-search-result__image > a',
             (element) => element.map((link) => link.href)
         )
-
         const links = [...new Set(allLinks)]
-
-        for (const item of links) {
-            await page.goto(item)
-
+        let count = 0
+        for (const l of links) {
+            if (count >= 15) {
+                break
+            }
+            await page.goto(l)
             await page.waitForSelector('.ui-pdp-title')
-
             const titulo = await page.$eval(
                 '.ui-pdp-title',
                 (element) => element.innerHTML
             )
-
             const preco = await page.$eval(
                 '.andes-money-amount__fraction',
                 (element) => element.innerHTML
             )
-
-            console.log({
-                url: item,
-                titulo: titulo,
-                preco: preco,
-            })
+            items.push({ url: l, titulo: titulo, preco: preco })
+            count++
         }
-
-        const data = await page.evaluate(() => {
-            return {}
-        })
-
-        await new Promise((r) => setTimeout(r, 5000))
-
+        //await new Promise((r) => setTimeout(r, 500));
         await page.close()
         await browser.close()
-
-        return data
+        return items
     }
 }
