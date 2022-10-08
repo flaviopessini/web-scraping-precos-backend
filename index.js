@@ -8,12 +8,19 @@ export async function main(req, res) {
     // const magazineLuiza = new GetDataMagazineLuiza(productUrl)
     // const response = await magazineLuiza.getData()
 
-    const productUrl = 'https://www.mercadolivre.com.br/'
-
-    const mercadolivre = new GetDataMercadolivre(productUrl)
-    const response = await mercadolivre.getData()
-
-    console.log('executando...')
+    const data = await req.body
+    let loja
+    switch (data.loja) {
+        case 'Mercadolivre':
+            loja = new GetDataMercadolivre(data.url)
+            break
+        case 'Magazineluiza':
+            console.log('Magazineluiza');
+            break
+        default:
+            break
+    }
+    const response = await loja.getData(data.search)
 
     res.status(200).send(response)
 }
