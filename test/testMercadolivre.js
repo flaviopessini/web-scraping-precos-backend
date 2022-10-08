@@ -17,6 +17,7 @@ async function request() {
     const response = await data.text()
     console.log(response)
 
+    /*
     const jsonObj = JSON.parse(response)
     fs.writeFileSync(
         'output.json',
@@ -33,6 +34,7 @@ async function request() {
             }
         }
     )
+    */
 }
 
 request()
