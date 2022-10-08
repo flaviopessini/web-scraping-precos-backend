@@ -6,8 +6,7 @@
         "browser": true
     },
     "extends": ["eslint:recommended", "prettier"],
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"

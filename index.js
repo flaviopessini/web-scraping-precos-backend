@@ -15,7 +15,7 @@ export async function main(req, res) {
             loja = new GetDataMercadolivre(data.url)
             break
         case 'Magazineluiza':
-            console.log('Magazineluiza');
+            console.log('Magazineluiza')
             break
         default:
             break
