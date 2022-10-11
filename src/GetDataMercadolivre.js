@@ -38,7 +38,7 @@ export class GetDataMercadolivre {
         const links = [...new Set(allLinks)]
         let count = 0
         for (const l of links) {
-            if (count >= 15) {
+            if (count >= 10) {
                 break
             }
             await page.goto(l)

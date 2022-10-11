@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import fs from 'fs'
+// import fs from 'fs'
 
 async function request() {
     // const serverUrl = 'http://localhost:8080/'
