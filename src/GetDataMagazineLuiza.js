@@ -1,8 +1,5 @@
 import puppeteer from 'puppeteer'
-
-const userAgent =
-    'Mozilla/5.0 (X11; Linux x86_64)' +
-    'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36'
+import constants from './utils/constants.js'
 
 export class GetDataMagazineLuiza {
     constructor(url) {
@@ -21,7 +18,7 @@ export class GetDataMagazineLuiza {
             'Content-Type': 'text/html; charset=utf-8',
         })
 
-        await page.setUserAgent(userAgent)
+        await page.setUserAgent(constants.USER_AGENT)
 
         await page.setViewport({ width: 1280, height: 720 })
 
