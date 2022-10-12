@@ -1,13 +1,13 @@
 import { GetDataMercadolivre } from './src/GetDataMercadolivre.js'
 import { GetDataMagazineLuiza } from './src/GetDataMagazineLuiza.js'
+import conf from './src/utils/conf.js'
 
 export async function main(req, res) {
-    // const productUrl =
-    //     'https://www.magazineluiza.com.br/pneu-aro-15-goodyear-185-60r15-88h-direction-sport/p/218806400/au/pine'
-    // const productUrl =
-    //     'https://www.magazineluiza.com.br/guarda-roupa-casal-espelho-6-portas-2-gavetas-real-atualle/p/fk4hj374j2/mo/guro/'
-
     const data = await req.body
+    console.log(process.env.SECRET_KEY)
+    if (data.secret == null || data.secret != conf.SECRET_KEY) {
+        res.status(403).send('401 Unauthorized')
+    }
     let loja
     let result
     switch (data.loja) {
@@ -24,8 +24,6 @@ export async function main(req, res) {
         default:
             break
     }
-    // response = await loja.getData(data.search) // COM BUSCA NO ML
-    //loja = await loja.getData() // SEM BUSCA
 
     res.status(200).send(result)
 }

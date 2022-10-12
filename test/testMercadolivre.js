@@ -10,6 +10,7 @@ async function request() {
         loja: 'Mercadolivre',
         url: productUrl,
         search: 'ssd 1 tb samsung evo plus',
+        secret: null
     }
     const data = await fetch(serverUrl, {
         method: 'post',
