@@ -1,15 +1,16 @@
 import fetch from 'node-fetch'
-import conf from './src/utils/conf.js'
+import conf from '../src/utils/conf.js'
+import constants from '../src/utils/constants.js'
 // import fs from 'fs'
 
 async function request() {
     const serverUrl = conf.SERVER_URL
     const productUrl = 'https://www.mercadolivre.com.br/'
     const body = {
-        loja: 'Mercadolivre',
+        secret: 'CHAVE_SECRETA_AQUI', // CHAVE SECRETA AQUI
+        loja: constants.MERCADO_LIVRE,
         url: productUrl,
         search: 'ssd 1 tb samsung evo plus',
-        secret: null,
     }
     const data = await fetch(serverUrl, {
         method: 'post',

@@ -1,6 +1,7 @@
 import { GetDataMercadolivre } from './src/GetDataMercadolivre.js'
 import { GetDataMagazineLuiza } from './src/GetDataMagazineLuiza.js'
 import conf from './src/utils/conf.js'
+import constants from './src/utils/constants.js'
 
 export async function main(req, res) {
     const data = await req.body
@@ -11,14 +12,12 @@ export async function main(req, res) {
     let loja
     let result
     switch (data.loja) {
-        case 'Mercadolivre':
+        case constants.MERCADO_LIVRE:
             loja = new GetDataMercadolivre(data.url)
-            console.log('Mercadolivre')
             result = await loja.getData(data.search)
             break
-        case 'Magazineluiza':
+        case constants.MAGAZINE_LUIZA:
             loja = new GetDataMagazineLuiza(data.url)
-            console.log('Magazineluiza')
             result = await loja.getData()
             break
         default:
