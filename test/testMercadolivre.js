@@ -1,16 +1,15 @@
 import fetch from 'node-fetch'
+import conf from './src/utils/conf.js'
 // import fs from 'fs'
 
 async function request() {
-    // const serverUrl = 'http://localhost:8080/'
-    const serverUrl =
-        'https://southamerica-east1-macro-centaur-321823.cloudfunctions.net/web-scraping'
+    const serverUrl = conf.SERVER_URL
     const productUrl = 'https://www.mercadolivre.com.br/'
     const body = {
         loja: 'Mercadolivre',
         url: productUrl,
         search: 'ssd 1 tb samsung evo plus',
-        secret: null
+        secret: null,
     }
     const data = await fetch(serverUrl, {
         method: 'post',
