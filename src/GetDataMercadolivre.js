@@ -6,7 +6,13 @@ export class GetDataMercadolivre {
         this.url = url
     }
 
-    async getData(search) {
+    async getData({ search, qntd }) {
+        if (!search || search.length <= 0) {
+            throw 'Campo de busca inválido'
+        }
+        if (!qntd || qntd <= 0) {
+            qntd = 10
+        }
         const items = []
         const browser = await puppeteer.launch({
             headless: true,
@@ -35,7 +41,7 @@ export class GetDataMercadolivre {
         const links = [...new Set(allLinks)]
         let count = 0
         for (const l of links) {
-            if (count >= 10) {
+            if (count >= qntd) {
                 break
             }
             await page.goto(l)

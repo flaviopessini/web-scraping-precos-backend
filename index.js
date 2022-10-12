@@ -5,16 +5,22 @@ import constants from './src/utils/constants.js'
 
 export async function main(req, res) {
     const data = await req.body
-    console.log(process.env.SECRET_KEY)
     if (data.secret == null || data.secret != conf.SECRET_KEY) {
-        res.status(403).send('401 Unauthorized')
+        return res.status(403).send('401 Unauthorized')
     }
     let loja
     let result
     switch (data.loja) {
         case constants.MERCADO_LIVRE:
-            loja = new GetDataMercadolivre(data.url)
-            result = await loja.getData(data.search)
+            try {
+                loja = new GetDataMercadolivre(data.url)
+                result = await loja.getData(data)
+            } catch (error) {
+                if (error == 'Campo de busca inválido') {
+                    return res.status(400).send(error)
+                }
+                return res.status(500).send(error)
+            }
             break
         case constants.MAGAZINE_LUIZA:
             loja = new GetDataMagazineLuiza(data.url)
@@ -24,5 +30,5 @@ export async function main(req, res) {
             break
     }
 
-    res.status(200).send(result)
+    return res.status(200).send(result)
 }
