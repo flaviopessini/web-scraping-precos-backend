@@ -16,6 +16,7 @@ export class GetDataMercadolivre {
         const items = []
         const browser = await puppeteer.launch({
             headless: true,
+            args: constants.PUPPETEER_ARGS,
         })
         const page = await browser.newPage()
         await page.setExtraHTTPHeaders({
