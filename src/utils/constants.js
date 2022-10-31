@@ -5,6 +5,7 @@ const constants = {
         'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36',
     MERCADO_LIVRE: 'MercadoLivre',
     MAGAZINE_LUIZA: 'MagazineLuiza',
+    AMAZON: 'Amazon',
     PUPPETEER_ARGS: [
         '--autoplay-policy=user-gesture-required',
         '--disable-background-networking',
