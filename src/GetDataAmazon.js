@@ -28,7 +28,7 @@ export class GetDataAmazon {
         )
         const preco = await page.$eval(
             '.a-price-whole',
-            (element) => element.innerHTML.split('<', 1)
+            (element) => parseFloat(element.innerHTML.split('<', 1)[0])
         )
         items.push({url: this.url, titulo: titulo, preco: preco})
 
