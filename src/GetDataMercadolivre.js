@@ -53,7 +53,7 @@ export class GetDataMercadolivre {
             )
             const preco = await page.$eval(
                 '.andes-money-amount__fraction',
-                (element) => element.innerHTML
+                (element) => parseFloat(element.innerHTML)
             )
             items.push({ url: l, titulo: titulo, preco: preco })
             count++
