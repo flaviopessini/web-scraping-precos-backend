@@ -15,7 +15,11 @@ export async function main(req, res) {
         case constants.MERCADO_LIVRE:
             try {
                 loja = new GetDataMercadolivre(data.url)
-                result = await loja.getData(data)
+                if (data.search == null && data.qntd == null) {
+                    result = await loja.getData()
+                } else {
+                    result = await loja.getDataBySearch(data)
+                }
             } catch (error) {
                 if (error == 'Campo de busca inválido') {
                     return res.status(400).send(error)

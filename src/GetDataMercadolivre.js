@@ -6,7 +6,38 @@ export class GetDataMercadolivre {
         this.url = url
     }
 
-    async getData({ search, qntd }) {
+    async getData() {
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: constants.PUPPETEER_ARGS,
+        })
+        const page = await browser.newPage()
+        await page.setExtraHTTPHeaders({
+            'Accept-Charset': 'utf-8',
+            'Content-Type': 'text/html; charset=utf-8',
+        })
+        await page.setUserAgent(constants.USER_AGENT)
+        await page.setViewport({ width: 1366, height: 768 })
+        await page.goto(this.url, {
+            waitUntil: 'domcontentloaded',
+        })
+        await page.waitForSelector('.ui-pdp-title')
+        const items = []
+        const titulo = await page.$eval('.ui-pdp-title', (element) =>
+            element.innerHTML.trim()
+        )
+        const preco = await page.$eval(
+            '.andes-money-amount__fraction',
+            (element) => element.innerHTML
+        )
+        items.push({ url: this.url, titulo: titulo, preco: preco })
+
+        await page.close()
+        await browser.close()
+        return items
+    }
+
+    async getDataBySearch({ search, qntd }) {
         if (!search || search.length <= 0) {
             throw 'Campo de busca inválido'
         }
