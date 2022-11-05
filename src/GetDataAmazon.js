@@ -22,15 +22,14 @@ export class GetDataAmazon {
             waitUntil: 'domcontentloaded',
         })
         const items = []
-        const titulo = await page.$eval(
-            '#productTitle',
-            (element) => element.innerHTML.trim()
+        const titulo = await page.$eval('#productTitle', (element) =>
+            element.innerHTML.trim()
         )
         const preco = await page.$eval(
             '.a-price-whole',
             (element) => element.innerHTML.split('<', 1)[0]
         )
-        items.push({url: this.url, titulo: titulo, preco: preco})
+        items.push({ url: this.url, titulo: titulo, preco: preco })
 
         await page.close()
         await browser.close()

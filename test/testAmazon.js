@@ -6,7 +6,8 @@ import constants from '../src/utils/constants.js'
 async function request() {
     //const serverUrl = conf.SERVER_URL
     const serverUrl = 'http://localhost:8080/'
-    const productUrl = 'https://www.amazon.com.br/dp/B08C1K6LB2?ref=MarsFS_fire_tv_B08C1K6LB2'
+    const productUrl =
+        'https://www.amazon.com.br/dp/B08C1K6LB2?ref=MarsFS_fire_tv_B08C1K6LB2'
     const body = {
         secret: 'CHAVE_SECRETA_AQUI', // CHAVE SECRETA AQUI
         loja: constants.AMAZON,
