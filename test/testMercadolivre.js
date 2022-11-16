@@ -7,7 +7,7 @@ async function request() {
     //const serverUrl = conf.SERVER_URL
     const serverUrl = 'http://localhost:8080/'
     const productUrl =
-        'https://produto.mercadolivre.com.br/MLB-2738529553-o-boticario-malbec-ultra-bleu-deo-colnia-100ml-_JM'
+        'https://produto.mercadolivre.com.br/MLB-1838289015-fire-tv-stick-controle-remoto-por-voz-com-alexa-amazon-_JM'
     const body = {
         secret: 'CHAVE_SECRETA_AQUI', // CHAVE SECRETA AQUI
         loja: constants.MERCADO_LIVRE,

@@ -26,10 +26,20 @@ export class GetDataMercadolivre {
         const titulo = await page.$eval('.ui-pdp-title', (element) =>
             element.innerHTML.trim()
         )
-        const preco = await page.$eval(
-            '.andes-money-amount__fraction',
-            (element) => element.innerHTML
-        )
+        let preco = 0
+        try {
+            preco = await page.$eval(
+                '.ui-pdp-price__second-line',
+                (element) =>
+                    element.querySelector('.andes-money-amount__fraction')
+                        .innerHTML
+            )
+        } catch (_) {
+            preco = await page.$eval(
+                '.andes-money-amount__fraction',
+                (element) => element.innerHTML
+            )
+        }
         items.push({ url: this.url, titulo: titulo, preco: preco })
 
         await page.close()
@@ -82,10 +92,20 @@ export class GetDataMercadolivre {
                 '.ui-pdp-title',
                 (element) => element.innerHTML
             )
-            const preco = await page.$eval(
-                '.andes-money-amount__fraction',
-                (element) => element.innerHTML
-            )
+            let preco = 0
+            try {
+                preco = await page.$eval(
+                    '.ui-pdp-price__second-line',
+                    (element) =>
+                        element.querySelector('.andes-money-amount__fraction')
+                            .innerHTML
+                )
+            } catch (_) {
+                preco = await page.$eval(
+                    '.andes-money-amount__fraction',
+                    (element) => element.innerHTML
+                )
+            }
             items.push({ url: l, titulo: titulo, preco: preco })
             count++
         }
