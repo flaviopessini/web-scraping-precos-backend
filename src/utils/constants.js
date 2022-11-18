@@ -6,6 +6,7 @@ const constants = {
     MERCADO_LIVRE: 'MercadoLivre',
     MAGAZINE_LUIZA: 'MagazineLuiza',
     AMAZON: 'Amazon',
+    GROWTH_SUPLEMENTOS: 'GrowthSuplementos',
     PUPPETEER_ARGS: [
         '--autoplay-policy=user-gesture-required',
         '--disable-background-networking',

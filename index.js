@@ -3,6 +3,7 @@ import { GetDataMagazineLuiza } from './src/GetDataMagazineLuiza.js'
 import { GetDataAmazon } from './src/GetDataAmazon.js'
 import conf from './src/utils/conf.js'
 import constants from './src/utils/constants.js'
+import { GetDataGrowthSuplementos } from './src/GetDataGrowthSuplementos.js'
 
 export async function main(req, res) {
     const data = await req.body
@@ -33,6 +34,10 @@ export async function main(req, res) {
             break
         case constants.AMAZON:
             loja = new GetDataAmazon(data.url)
+            result = await loja.getData()
+            break
+        case constants.GROWTH_SUPLEMENTOS:
+            loja = new GetDataGrowthSuplementos(data.url)
             result = await loja.getData()
             break
         default:
