@@ -1,5 +1,5 @@
 # web-scraping-black-friday
-Projeto de web scraping em node.js no Google Cloud Functions.
+Projeto backend de web scraping em node.js para Google Cloud Functions.
 
 ## Configurações necessárias*
 1 - Renomeie ou faça uma cópia do arquivo encontrado em *'src/utils/conf.example.js'* para *'conf.js'*<br>
